@@ -21,14 +21,14 @@
   --r:18px;
   --r-lg:28px;
 
-  --pad-x:clamp(20px, 4vw, 64px);
-  --pad-section:clamp(80px, 10vw, 160px);
+  --pad-x:clamp(18px, 4vw, 64px);
+  --pad-section:clamp(72px, 10vw, 160px);
 
-  --t-h1:clamp(48px, 9vw, 148px);
-  --t-h2:clamp(36px, 5.4vw, 84px);
-  --t-h3:clamp(22px, 1.8vw, 28px);
+  --t-h1:clamp(44px, 9vw, 148px);
+  --t-h2:clamp(32px, 5.4vw, 84px);
+  --t-h3:clamp(20px, 1.8vw, 28px);
   --t-body:clamp(16px, 1.05vw, 18px);
-  --t-lead:clamp(18px, 1.4vw, 22px);
+  --t-lead:clamp(17px, 1.4vw, 22px);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -746,4 +746,153 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
   .footer__inner{grid-template-columns:1fr; gap:48px}
   .footer__cols{grid-template-columns:1fr 1fr}
   .footer__bottom{flex-direction:column; gap:8px}
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE — MOBILE REFINEMENTS
+   ───────────────────────────────────────────────────────────── */
+
+/* iOS safe-area for footer */
+@supports (padding: max(0px)){
+  .footer{ padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+}
+
+/* Disable hover lifts on touch devices (they stick + cause jank) */
+@media (hover:none){
+  .btn:hover,
+  .nav__cta:hover,
+  .showcase__item:hover,
+  .showcase__item:hover .showcase__media img,
+  .card:hover{
+    transform:none !important;
+    background: inherit;
+  }
+}
+
+/* Tablet (≤980px) */
+@media (max-width:980px){
+  .section{ padding: clamp(64px, 11vw, 120px) var(--pad-x); }
+  .section--dark,
+  .section--soft{
+    margin:0 12px;
+    border-radius:32px;
+  }
+}
+
+/* Small tablet / large phone (≤720px) */
+@media (max-width:720px){
+  /* Nav: tighten + ensure brand stays readable */
+  .nav__inner{ padding:14px var(--pad-x); gap:12px; }
+  .brand-name{ font-size:14px; }
+  .nav__cta{ padding:10px 16px; font-size:13px; }
+
+  /* Hero */
+  .hero{ padding-top:104px; gap:0; }
+  .hero__title{ letter-spacing:-.035em; margin-bottom:24px; }
+  .hero__sub{ margin-bottom:32px; }
+  .hero__ctas{ margin-bottom:48px; gap:10px; }
+  .hero__ctas .btn{ flex:1 1 auto; justify-content:center; padding:15px 20px; }
+  .hero__stats{ gap:18px; padding-top:28px; }
+  .hero__stats b{ font-size:28px; }
+  .hero__stats small{ font-size:11.5px; }
+  .hero__visual{ padding:32px 0 0; }
+  .hero__photo{ border-radius:24px; }
+  .hero__chip{ padding:10px 12px; font-size:12px; border-radius:12px; }
+  .hero__chip--1{ left:10px; bottom:10px; }
+  .hero__chip--2{ right:10px; top:10px; }
+  .hero__chip--1 .chip-meta{ font-size:10.5px; }
+
+  /* Marquee smaller on phone */
+  .hero__marquee{ margin-top:56px; padding:18px 0; }
+  .marquee__track{ font-size:clamp(22px, 7vw, 32px); gap:22px; }
+
+  /* Manifesto */
+  .manifesto{ padding: clamp(64px, 14vw, 100px) var(--pad-x); }
+  .manifesto p{ font-size:clamp(24px, 6.4vw, 38px); line-height:1.15; }
+
+  /* Sections — rounded panels closer to edge, smaller radius */
+  .section--dark,
+  .section--soft{
+    margin:0 8px;
+    border-radius:24px;
+  }
+  .section__head{ gap:14px; margin-bottom:48px; }
+
+  /* Cards */
+  .card{ padding:28px 24px; gap:14px; }
+  .card ul{ padding-top:20px; }
+
+  /* Showcase */
+  .showcase{ gap:14px; }
+  .showcase__item{ border-radius:22px; }
+  .showcase__media{ aspect-ratio:4/3; }
+  .showcase__item--big .showcase__media{ aspect-ratio:4/3; }
+  .showcase__body{ padding:22px; gap:8px; }
+  .showcase__body h3{ font-size:22px; }
+
+  /* Process */
+  .process{ gap:18px; }
+  .process li{ padding-top:18px; gap:12px; }
+  .process__num{ font-size:44px; }
+
+  /* Quotes */
+  .quote{ padding:28px 24px; gap:22px; border-radius:20px; }
+  .quote blockquote{ font-size:19px; line-height:1.35; }
+  .trust{ margin-top:56px; grid-template-columns:repeat(2,1fr); border-radius:18px; }
+  .trust > div:nth-child(5){ grid-column:1 / -1; }  /* 5th badge spans full width */
+  .trust > div{ padding:24px 14px; }
+  .trust b{ font-size:16px; }
+
+  /* Contact */
+  .contact{ padding:36px 24px; border-radius:24px; gap:32px; }
+  .contact__intro h2{ font-size:clamp(34px, 9vw, 50px); }
+  .contact__intro p{ margin-bottom:28px; }
+  .contact__info li{ flex-direction:column; gap:4px; align-items:flex-start; }
+  .contact__info b{ text-align:left; }
+  .contact__form{ padding:24px 20px; border-radius:18px; }
+
+  /* Inputs: 16px prevents iOS auto-zoom on focus */
+  .field input,
+  .field select,
+  .field textarea{
+    font-size:16px;
+    padding:13px 14px;
+    border-radius:10px;
+  }
+  .field label{ font-size:11.5px; }
+
+  /* Touch targets */
+  .btn{ min-height:48px; padding:14px 22px; }
+  .nav__burger{ width:44px; height:44px; }
+
+  /* Footer */
+  .footer{ padding:64px var(--pad-x) 28px; }
+  .footer__cols{ grid-template-columns:1fr; gap:28px; }
+}
+
+/* Tiny phones (≤380px) */
+@media (max-width:380px){
+  .hero__stats{ grid-template-columns:1fr 1fr; gap:14px; }
+  .hero__stats b{ font-size:24px; }
+  .hero__chip--1 .chip-label{ font-size:11.5px; }
+  .hero__chip--2{ display:none; }   /* avoid overlap on very narrow screens */
+  .section__head h2{ letter-spacing:-.03em; }
+  .contact__info li{ font-size:14px; }
+}
+
+/* Landscape phones — keep hero usable */
+@media (max-width:900px) and (orientation:landscape) and (max-height:520px){
+  .hero{ min-height:auto; padding-top:96px; padding-bottom:48px; }
+  .hero__photo{ max-width:340px; aspect-ratio:4/3; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{ opacity:1; transform:none; }
 }
