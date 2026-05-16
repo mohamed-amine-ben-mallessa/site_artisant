@@ -1,3 +1,6 @@
+// ─── flag JS-on (used to scope .reveal hiding so the page stays visible without JS)
+document.documentElement.classList.add('js');
+
 // ─── year
 document.getElementById('y').textContent = new Date().getFullYear();
 

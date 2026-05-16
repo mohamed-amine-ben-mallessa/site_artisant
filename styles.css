@@ -50,15 +50,15 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.005em}
 ::selection{background:var(--ink);color:var(--paper)}
 
-/* ─── reveal on scroll ─── */
-.reveal{
+/* ─── reveal on scroll (only hides when JS is enabled) ─── */
+.js .reveal{
   opacity:0;
   transform:translateY(18px);
   transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),
              transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s);
   will-change:opacity,transform;
 }
-.reveal.is-in{opacity:1;transform:none}
+.js .reveal.is-in{opacity:1;transform:none}
 
 /* ─── NAV ─── */
 .nav{
@@ -93,10 +93,12 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
 .brand-mark--lg{ width:56px; height:56px; border-radius:14px; font-size:30px; }
 .brand-name{font-size:15px}
 
-.nav__links{display:flex; align-items:center; gap:30px}
+.nav__links{display:flex; align-items:center; gap:8px}
 .nav__links a{
   font-size:14px; color:var(--ink); opacity:.78;
-  transition:opacity .2s ease;
+  padding:10px 14px;
+  border-radius:999px;
+  transition:opacity .2s ease, background .2s ease;
 }
 .nav__links a:hover{opacity:1}
 .nav__cta{
@@ -138,11 +140,15 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
   min-height:100vh;
   padding:140px var(--pad-x) 0;
   display:grid;
-  grid-template-columns: 1.15fr .85fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
   gap:60px;
   align-items:center;
   max-width:1440px; margin:0 auto;
+  overflow:hidden;
 }
+.hero__inner,
+.hero__visual,
+.hero__marquee{ min-width:0; }
 .hero__grain{
   position:absolute; inset:0;
   background-image:
@@ -271,7 +277,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
 .hero__chip--1 .chip-label{font-weight:600}
 .hero__chip--1 .chip-meta{color:var(--muted); font-size:11.5px}
 .hero__chip--2{
-  right:-20px; top:80px;
+  right:8px; top:80px;
   display:flex; align-items:center; gap:8px;
   font-weight:500;
   animation-delay:-3.5s;
@@ -314,15 +320,15 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
 
 @media (max-width:980px){
   .hero{
-    grid-template-columns:1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding-top:120px;
     gap:0;
     min-height:auto;
   }
   .hero__visual{padding-top:40px}
   .hero__photo{transform:none; max-width:100%; aspect-ratio:5/6}
-  .hero__chip--1{left:8px; bottom:14px}
-  .hero__chip--2{right:8px; top:14px}
+  .hero__chip--1{left:12px; bottom:14px}
+  .hero__chip--2{right:12px; top:14px}
   .hero__stats{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -637,6 +643,12 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
   color:rgba(255,255,255,.45);
 }
 .contact__info b{font-weight:500; font-size:15px; text-align:right}
+.contact__info a{
+  display:inline-block;
+  padding:6px 0;
+  min-height:44px;
+  line-height:32px;
+}
 .contact__info a:hover{color:#f1c4ad}
 
 .contact__form{
@@ -732,6 +744,12 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:.00
   color:var(--muted); margin-bottom:12px; font-weight:500;
 }
 .footer__cols p{font-size:14px; line-height:1.6; color:var(--ink)}
+.footer__cols a{
+  display:inline-block;
+  padding:4px 0;
+  min-height:32px;
+  line-height:24px;
+}
 .footer__cols a:hover{color:var(--terra-deep)}
 
 .footer__bottom{

@@ -1,0 +1,7 @@
+node_modules/
+package.json
+package-lock.json
+_audit.mjs
+_audit-out/
+.DS_Store
+Thumbs.db
